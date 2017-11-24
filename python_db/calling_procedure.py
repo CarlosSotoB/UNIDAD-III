@@ -32,5 +32,5 @@ def get_parts(vendor_id):
             conn.close()
 
 
-if __name__ == '__main__':
-    get_parts(1)
+    if __name__ == '__main__':
+        get_parts(1)
