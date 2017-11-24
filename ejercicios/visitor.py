@@ -1,0 +1,53 @@
+# Author: Jose Carlos Soto Barco
+#description: a bridge is a visitor
+
+
+class House(object): # The class being visited
+    def accept(self, visitor):
+        """ Insert to accept a visitor """
+        #Triggers the visiting operation!
+        visitor.visit(self)
+
+    def work_on_hvac(self, hvac_specialist):
+        print(self, " worked on by", hvac_specialist) # note that we now have a reference to the HVAC specialist object in the house object!
+
+    def work_on_electricity(self, electrician):
+        print(self, " worked on by", electrician) # note that we have a reference to electrician object in the house object!
+
+    def __str__(self):
+        """ Simply return the class name the House object is printed """
+        return self.__class__.__name__
+
+
+class Visitor(object):
+    """ Abstract visitor"""
+    def __str__(self):
+        """ Simply return the class name  when the visitor object is printed """
+        return self.__class__.__name__
+
+
+class HvaSpecialist(Visitor): # Inherits from the parent class, Visitor
+    """ Concrete visitor: HVAC specialist """
+    def visit(self, house):
+        house.work_on_hvac(self)# Note that the visitor now has a references to the house object
+
+
+class Electrician(Visitor): # Inherits from the parent class, Visitor
+    """ Concrete visitor: HVAC specialist """
+    def visit(self, house):
+        house.work_on_electricity(self) # Note that the visitor now has a references to the house object
+
+# Create an HVAC specialist
+hv = HvaSpecialist()
+
+# Create an electrician
+e = Electrician()
+
+# Create a house
+home = House()
+
+# Let the house accept the HVAC specialist and work on the house by invoking the visit() method
+home.accept(hv)
+
+# Let the house accept the Electrician and work on the house by invoking the visit() method
+home.accept(e)
